@@ -1,0 +1,7 @@
+
+.post:first-child{
+   margin-top: 10px;
+}
+.post{
+   margin-bottom: 5px;
+}

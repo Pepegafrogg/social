@@ -1,0 +1,39 @@
+.main{
+   padding-left: 20px;
+   width: 100%;
+
+}
+.header__img{
+   max-height: 180px;
+   width: 100%;
+}
+.main__profile{
+   margin-top: 15px;
+   display: flex;
+   align-items: center;
+}
+.profile__img1{
+   width: 100%;
+   max-width: 180px;
+   height: auto;
+   padding-right: 40px;
+}
+.profile__name{
+   margin-bottom: 20px;
+}
+.main__posts{
+   width: 100%;
+}
+.main__formname{
+   margin: 15px 0;
+}
+.main__form{
+   height: 50px;
+   background-color: #000;
+}
+.main__listofpost:first-child{
+   margin-top: 10px;
+}
+.main__listofpost{
+   margin-bottom: 5px;
+}

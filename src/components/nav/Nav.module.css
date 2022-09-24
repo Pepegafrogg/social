@@ -1,0 +1,8 @@
+.nav{
+   width: 20%;
+   padding: 15px;
+   background-color: green;
+}
+.nav__item{
+   margin-bottom: 10px;
+}

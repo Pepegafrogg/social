@@ -1,15 +1,16 @@
 import React from 'react';
 import classes from './Nav.module.css'
+import NavItem from './navItem/NavItem';
 
 const Nav = () => {
    return (
-      <nav className={classes.nav}>
-         <div className={classes.nav__item}>1</div>
-         <div className={classes.nav__item}>2</div>
-         <div className={classes.nav__item}>3</div>
-         <div className={classes.nav__item}>4</div>
-         <div className={classes.nav__item}>5</div>
-      </nav>
+      <div className={classes.nav}>
+         <NavItem value={'/Profile'} />
+         <NavItem value={'/Messages'} />
+         <NavItem value={'/News'} />
+         <NavItem value={'/Music'} />
+         <NavItem value={'/Settings'} />
+      </div>
    );
 }
 

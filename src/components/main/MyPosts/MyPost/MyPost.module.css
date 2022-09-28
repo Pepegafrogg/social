@@ -3,5 +3,8 @@
    margin-top: 10px;
 }
 .post{
-   margin-bottom: 5px;
+   margin-bottom: 20px;
+}
+.post:last-child{
+   margin-bottom: 0;
 }

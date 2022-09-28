@@ -4,10 +4,17 @@
 .formname{
    margin: 15px 0;
 }
-.form{
-   height: 50px;
-   background-color: #000;
+.form textarea{
+   width: 100%;
+   min-height: 70px;
+   position: relative;
+}
+.form button{
+   padding: 15px;
+   position: absolute;
+   right: 0px;
+
 }
 .listOfPosts{
-
+   margin-top: 50px;
 }

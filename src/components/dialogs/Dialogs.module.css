@@ -2,6 +2,35 @@
    padding-left: 20px;
    margin-left: 20px;
    width: 100%;
-   background-color: black;
 
+}
+.dialogs_wrapper{
+   display: flex;
+}
+.dialogs__header{
+   font-weight: 500;
+   font-size: 25px;
+   width: 100%;
+   margin-bottom: 25px;
+}
+.dialogs__item{
+   border-right: 1px solid rgb(106, 18, 151);
+   padding-right: 15%;
+   padding-left: 30px;
+
+}
+.messages__item{
+   position: relative;
+
+}
+.messages__item:before{
+   /* content: "";
+   display: block;
+   background-color: gray;
+   border-radius: 10px;
+   width: 7px;
+   height: 7px;
+
+   position: absolute; */
+   
 }

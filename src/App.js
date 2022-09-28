@@ -17,7 +17,7 @@ function App() {
             <div className="page">
                <Nav />
                <Routes>
-                  <Route path="/" element={<App />} />
+                  <Route path="/" element={<Dialogs />} />
                   <Route path="/profile" element={<Main />} />
                   <Route path="/messages" element={<Dialogs />} />
                   <Route path="/news" element={<News />} />

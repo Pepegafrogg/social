@@ -4,12 +4,12 @@ import classes from './Main.module.css'
 import MyPosts from './MyPosts/MyPosts';
 import Profile from './Profile/Profile';
 
-const Main = () => {
+const Main = (props) => {
    return (
       <div className={classes.main}>
          <Header />
          <Profile />
-         <MyPosts />
+         <MyPosts postsData={props.postsData} />
       </div>
    );
 }

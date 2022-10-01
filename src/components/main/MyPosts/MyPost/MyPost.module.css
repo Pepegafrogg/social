@@ -3,8 +3,17 @@
    margin-top: 10px;
 }
 .post{
+   width: 100%;
    margin-bottom: 20px;
 }
 .post:last-child{
    margin-bottom: 0;
+}
+.postText{
+   margin-bottom: 10px;
+   padding: 10px 0;
+
+}
+.postLikes{
+
 }

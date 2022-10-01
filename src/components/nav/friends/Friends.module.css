@@ -1,0 +1,11 @@
+.friendsWrapper{
+   color: #fff;
+   margin-top: 150px;
+}
+.friendsHeader{
+   margin-bottom: 20px;
+   font-size: 30px;
+}
+.friendsFlexWrapper{
+   display: flex;
+}

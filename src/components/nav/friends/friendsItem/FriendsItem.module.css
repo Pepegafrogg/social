@@ -1,0 +1,12 @@
+.friendsItem{
+   margin-right: 20px;
+}
+.friendsItem:last-child{
+   margin-right: 0;
+}
+.avatar{
+
+}
+.name{
+
+}

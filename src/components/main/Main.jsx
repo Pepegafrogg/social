@@ -9,7 +9,7 @@ const Main = (props) => {
       <div className={classes.main}>
          <Header />
          <Profile />
-         <MyPosts postsData={props.postsData} />
+         <MyPosts postsData={props.state.postsData} addPost={props.addPost} />
       </div>
    );
 }

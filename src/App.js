@@ -16,9 +16,9 @@ function App(props) {
          <div className="page">
             <Nav state={props.appState.navFriends} />
             <Routes>
-               <Route path="/" element={<Main updateNewPostText={props.updateNewPostText} profilePage={props.appState.profilePage} addPost={props.addPost} />} />
-               <Route path="/profile" element={<Main updateNewPostText={props.updateNewPostText} profilePage={props.appState.profilePage} addPost={props.addPost} />} />
-               <Route path="/messages/*" element={<Dialogs state={props.appState.dialogPage} />} />
+               <Route path="/" element={<Main dispatch={props.dispatch} profilePage={props.appState.profilePage} />} />
+               <Route path="/profile" element={<Main dispatch={props.dispatch} profilePage={props.appState.profilePage} />} />
+               <Route path="/messages/*" element={<Dialogs dispatch={props.dispatch} state={props.appState.dialogPage} />} />
                <Route path="/news" element={<News />} />
                <Route path="/music" element={<Music />} />
                <Route path="/settings" element={<Settings />} />

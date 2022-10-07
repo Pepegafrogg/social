@@ -1,6 +1,12 @@
 let reRender = () => {
    console.log(123)
 }
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
+
 const store = {
    _state: {
       profilePage: {
@@ -30,6 +36,7 @@ const store = {
             { id: 5, name: 'Pepega5', message: 'I like ' },
             { id: 6, name: 'Pepega6', message: 'To do kwa' },
          ],
+         newMessageBody: 'ddddddd'
       },
       navFriends: {
          friendsData: [
@@ -42,26 +49,57 @@ const store = {
    getState() {
       return this._state
    },
+   subscribe(observer) {
+      reRender = observer
+   },
    takePostId() {
       const list = this._state.profilePage.postsData
       const lasdId = list[list.length - 1].id
       return lasdId
    },
-   addPost() {
-      const lastId = this.takePostId()
-      const newPost = { id: lastId + 1, post: store._state.profilePage.nextPostText, likes: 0 }
-      this._state.profilePage.postsData.push(newPost)
-      this._state.profilePage.nextPostText = ''
-      reRender(this._state)
+   takeMessageId() {
+      const list = this._state.dialogPage.messagesData
+      const lasdId = list[list.length - 1].id
+      return lasdId
    },
-   updateNewPostText(newText) {
-      this._state.profilePage.nextPostText = newText
-      reRender(this._state)
-   },
-   subscribe(observer) {
-      reRender = observer
+   dispatch(action) {
+      if (action.type === ADD_POST) {
+         const lastId = this.takePostId()
+         const newPost = { id: lastId + 1, post: store._state.profilePage.nextPostText, likes: 0 }
+         this._state.profilePage.postsData.push(newPost)
+         this._state.profilePage.nextPostText = ''
+         reRender(this._state)
+      } else if (action.type === UPDATE_NEW_POST_TEXT) {
+         this._state.profilePage.nextPostText = action.newText
+         reRender(this._state)
+      } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+         this._state.dialogPage.newMessageBody = action.newMessageText
+         reRender(this._state)
+      } else if (action.type === SEND_MESSAGE) {
+         const lastId = this.takeMessageId()
+         const body = this._state.dialogPage.newMessageBody
+         this._state.dialogPage.newMessageBody = ''
+         const newMessage = { id: lastId + 1, name: 'asd', message: body }
+         this._state.dialogPage.messagesData.push(newMessage)
+         reRender(this._state)
+      }
    }
 
 }
 
+export const addPostActionCreator = () => ({ type: ADD_POST })
+
+export const updateNewPostTextActionCreator = (text) => {
+   return {
+      type: UPDATE_NEW_POST_TEXT,
+      newText: text
+   }
+}
+export const updateNewMessageActionCreator = (text) => {
+   return {
+      type: UPDATE_NEW_MESSAGE_BODY,
+      newMessageText: text
+   }
+}
+export const sendMessageActionCreator = (text) => ({ type: SEND_MESSAGE })
 export default store

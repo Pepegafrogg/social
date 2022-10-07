@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const reRender = () => {
    root.render(
       <BrowserRouter>
-         <App appState={store.getState()} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)} />
+         <App appState={store.getState()} dispatch={store.dispatch.bind(store)} />
       </BrowserRouter>
    );
 }

@@ -14,11 +14,11 @@ function App(props) {
       <div className="App">
          <Header />
          <div className="page">
-            <Nav state={props.store.navFriends} />
+            <Nav />
             <Routes>
-               <Route path="/" element={<Main store={props.store} dispatch={props.dispatch} />} />
-               <Route path="/profile" element={<Main store={props.store} dispatch={props.dispatch} />} />
-               <Route path="/messages/*" element={<DialogsContainer dispatch={props.dispatch} store={props.store} />} />
+               <Route path="/" element={<Main />} />
+               <Route path="/profile" element={<Main />} />
+               <Route path="/messages/*" element={<DialogsContainer />} />
                <Route path="/news" element={<News />} />
                <Route path="/music" element={<Music />} />
                <Route path="/settings" element={<Settings />} />

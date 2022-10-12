@@ -1,7 +1,10 @@
 import React from 'react';
+import MyPost from './MyPost/MyPost';
 import classes from './MyPosts.module.css'
 
 const MyPosts = (props) => {
+
+   const postsElements = props.posts.map(p => <MyPost id={p.id} post={p.post} likes={p.likes} key={p.id} />)
 
    const addPost = () => {
       props.addPost()
@@ -20,7 +23,7 @@ const MyPosts = (props) => {
             <button onClick={addPost}>add post</button>
          </div>
          <div className={classes.listOfPosts}>
-            {props.postsElements}
+            {postsElements}
          </div>
       </div>
    );

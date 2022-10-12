@@ -10,7 +10,7 @@ const initialState = {
       { id: 5, post: 'react app', likes: 12 },
       { id: 6, post: 'that is all', likes: 8 }
    ],
-   nextPostText: 'asd'
+   nextPostText: 'asasdd'
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -23,12 +23,15 @@ const profileReducer = (state = initialState, action) => {
    if (action.type === ADD_POST) {
       const lastId = takeProfileId()
       const newPost = { id: lastId + 1, post: state.nextPostText, likes: 0 }
-      state.postsData.push(newPost)
-      state.nextPostText = ''
-      return state
+      const stateCopy = { ...state }
+      stateCopy.postsData = [...state.postsData]
+      stateCopy.postsData.push(newPost)
+      stateCopy.nextPostText = ''
+      return stateCopy
    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      state.nextPostText = action.newText
-      return state
+      const stateCopy = { ...state }
+      stateCopy.nextPostText = action.newText
+      return stateCopy
    }
    return state
 }

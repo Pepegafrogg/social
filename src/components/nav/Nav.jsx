@@ -1,5 +1,5 @@
 import React from 'react';
-import Friends from './friends/Friends';
+import FriendsContainer from './friends/FriendsContainer';
 import classes from './Nav.module.css'
 import NavItem from './navItem/NavItem';
 
@@ -11,7 +11,7 @@ const Nav = (props) => {
          <NavItem value={'/News'} />
          <NavItem value={'/Music'} />
          <NavItem value={'/Settings'} />
-         <Friends state={props.state} />
+         <FriendsContainer />
       </div>
    );
 }

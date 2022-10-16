@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Friends from './friendsItem/FriendsItem';
+import Friends from './Friends';
 import FriendsItem from './friendsItem/FriendsItem';
 
 
 const mapStateToProps = (state) => {
 
-   const postsElements = state.navFriends.friendsData.map(friend => <FriendsItem id={friend.id} name={friend.name} key={friend.id} />)
+   const friendsElements = state.navFriends.friendsData.map(friend => <FriendsItem id={friend.id} name={friend.name} key={friend.id} />)
    return {
-      postsElements: postsElements
+      friendsElements: friendsElements
    }
 
 }

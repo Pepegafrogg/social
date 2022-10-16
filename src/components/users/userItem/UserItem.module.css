@@ -1,0 +1,47 @@
+.userItem{
+   margin-bottom: 20px;
+   display: flex;
+}
+.content{
+   min-width: 350px;
+   margin-left: 30px;
+   border: 1px solid gray;
+   border-radius: 8px;
+   padding: 10px;
+   display: flex;
+   justify-content: space-between;
+}
+.nameAndStatus{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+.name{}
+.status{
+}
+.location{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+.country{
+   margin-bottom: 5px;
+}
+.city{
+   text-align: center;
+}
+.avatarAndBtn{}
+.avatar img{
+   border-radius: 50px;
+   width: 70px;
+}
+.btn{
+   min-width: 80px;
+   margin-top: 5px;
+   color: white;
+   text-align: center;
+   background-color: rgb(6, 109, 6);
+   padding: 10px;
+   border: 1px solid black;
+   border-radius: 5px;
+}

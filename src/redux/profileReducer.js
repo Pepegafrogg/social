@@ -23,15 +23,16 @@ const profileReducer = (state = initialState, action) => {
    if (action.type === ADD_POST) {
       const lastId = takeProfileId()
       const newPost = { id: lastId + 1, post: state.nextPostText, likes: 0 }
-      const stateCopy = { ...state }
-      stateCopy.postsData = [...state.postsData]
-      stateCopy.postsData.push(newPost)
-      stateCopy.nextPostText = ''
-      return stateCopy
+      return {
+         ...state,
+         nextPostText: '',
+         postsData: [...state.postsData, newPost],
+      }
    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      const stateCopy = { ...state }
-      stateCopy.nextPostText = action.newText
-      return stateCopy
+      return {
+         ...state,
+         nextPostText: action.newText
+      }
    }
    return state
 }

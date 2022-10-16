@@ -23,11 +23,6 @@ const initialState = {
 }
 
 const dialogsReducer = (state = initialState, action) => {
-   const stateCopy = {
-      ...state,
-      messagesData: [...state.messagesData]
-   }
-
    const takeMessageId = () => {
       const list = state.messagesData
       const lasdId = list[list.length - 1].id
@@ -35,15 +30,19 @@ const dialogsReducer = (state = initialState, action) => {
    }
 
    if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-      stateCopy.newMessageBody = action.newMessageText
-      return state
+      return {
+         ...state,
+         newMessageBody: action.newMessageText
+      }
    } else if (action.type === SEND_MESSAGE) {
+      const body = state.newMessageBody
       const lastId = takeMessageId()
-      const body = stateCopy.newMessageBody
-      stateCopy.newMessageBody = ''
       const newMessage = { id: lastId + 1, name: 'asd', message: body }
-      stateCopy.messagesData.push(newMessage)
-      return state
+      return {
+         ...state,
+         newMessageBody: '',
+         messagesData: [...state.messagesData, newMessage]
+      }
    }
 
    return state
@@ -56,6 +55,6 @@ export const updateNewMessageActionCreator = (text) => {
       newMessageText: text
    }
 }
-export const sendMessageActionCreator = (text) => ({ type: SEND_MESSAGE })
+export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE })
 
 export default dialogsReducer

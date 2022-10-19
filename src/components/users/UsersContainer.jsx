@@ -10,10 +10,10 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
    return {
-      addFriend: (userId) => {
+      follow: (userId) => {
          dispatch(followAC(userId))
       },
-      deleteFriend: (userId) => {
+      unfollow: (userId) => {
          dispatch(unFollowAC(userId))
       },
       setUsers: (users) => {

@@ -1,35 +1,37 @@
-import axios from 'axios';
 import React from 'react';
 import UsersItem from './userItem/usersItem';
 import classes from './Users.module.css';
 
-class Users extends React.Component {
-   constructor(props) {
-      super(props)
-      axios.get("https://social-network.samuraijs.com/api/1.0/users")
-         .then(response => {
-            this.props.setUsers(response.data.items)
-         })
+const Users = ({ props, changePage }) => {
+   const pagesCount = Math.ceil(props.totalCount / props.pageSize)
+   const pages = []
+   for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i)
    }
+   return (
+      <div className={classes.users}>
 
-   getUsers = () => {
-      {
-         axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-               this.props.setUsers(response.data.items)
-            })
-      }
-   }
+         <div className={classes.usersNav}>
+            {pages.map(i => {
+               return (
+                  <span className={props.currentPage === i
+                     ? classes.selectedPage
+                     : classes.otherPage
+                  }
+                     onClick={(e) => changePage(i)}
+                  >
+                     {i}
+                  </span>
+               )
+            })}
+         </div>
 
-   render() {
-      return (
-         <div className={classes.users}>
-            <button onClick={this.getUsers}>Get users</button>
-            {this.props.users.map(u =>
+         <div className={classes.usersPage}>
+            {props.users.map(u =>
                <UsersItem
                   key={u.id}
-                  follow={this.props.follow}
-                  unfollow={this.props.unfollow}
+                  follow={props.follow}
+                  unfollow={props.unfollow}
                   id={u.id}
                   photo={u.photos.small}
                   followed={u.followed}
@@ -39,8 +41,9 @@ class Users extends React.Component {
                // // city={u.location.city}
                />)}
          </div>
-      );
-   }
+
+      </div>
+   );
 }
 
 export default Users;

@@ -18,7 +18,7 @@ function App(props) {
             <Nav />
             <Routes>
                <Route path="/" element={<Main />} />
-               <Route path="/profile" element={<Main />} />
+               <Route path="/profile/*" element={<Main />} />
                <Route path="/messages/*" element={<DialogsContainer />} />
                <Route path="/users" element={<UsersContainer />} />
                <Route path="/news" element={<News />} />

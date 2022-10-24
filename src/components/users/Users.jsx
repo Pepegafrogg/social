@@ -10,7 +10,6 @@ const Users = ({ props, changePage }) => {
    }
    return (
       <div className={classes.users}>
-
          <div className={classes.usersNav}>
             {pages.map(i => {
                return (
@@ -25,7 +24,6 @@ const Users = ({ props, changePage }) => {
                )
             })}
          </div>
-
          <div className={classes.usersPage}>
             {props.users.map(u =>
                <UsersItem
@@ -41,7 +39,6 @@ const Users = ({ props, changePage }) => {
                // // city={u.location.city}
                />)}
          </div>
-
       </div>
    );
 }

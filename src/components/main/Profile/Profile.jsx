@@ -1,8 +1,12 @@
 import React from 'react';
+import PreLoader from '../../common/preLoader/preLoader';
 import classes from './Profile.module.css'
 import ProfileItem from './ProfileItem/ProfileItem';
 
-const Profile = () => {
+const Profile = (props) => {
+   if (!props.profile) {
+      return <PreLoader />
+   }
    return (
       <div className={classes.profile}>
          <div className={classes.profileImg}>
@@ -10,7 +14,7 @@ const Profile = () => {
          </div>
          <div className={classes.profileInfo}>
             <div className={classes.profileName}>
-               Dmitry K.
+               {props.profile.fullName}
             </div>
             <div className={classes.profileOtherInfo}>
                <ProfileItem value={'Date of birth:2january'} />

@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 
 // { id: 1, avatar: 'https://ichef.bbci.co.uk/news/976/cpsprodpb/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg', followed: false, name: 'Alexey', status: 'Sad', location: { country: 'Belarus', city: 'Minsk' } },
@@ -14,9 +15,9 @@ const initialState = {
    users: [],
    pageSize: 5,
    totalCount: 0,
-   currentPage: 1
+   currentPage: 1,
+   isFetching: true
 }
-
 const dialogsReducer = (state = initialState, action) => {
    let stateCopy;
    switch (action.type) {
@@ -59,42 +60,51 @@ const dialogsReducer = (state = initialState, action) => {
             totalCount: action.count
          }
          return stateCopy
+      case TOGGLE_IS_FETCHING:
+         stateCopy = {
+            ...state,
+            isFetching: action.isFetching
+         }
+         return stateCopy
 
       default: return state
    }
-
-
 }
 
-
-export const followAC = (userId) => {
+export const follow = (userId) => {
    return {
       type: FOLLOW,
       userId: userId
    }
 }
-export const unFollowAC = (userId) => {
+export const unFollow = (userId) => {
    return {
       type: UNFOLLOW,
       userId: userId
    }
 }
-export const setUsersAC = (users) => {
+export const setUsers = (users) => {
    return {
       type: SET_USERS,
       users: users
    }
 }
-export const setCurrentPageAC = (page) => {
+export const setCurrentPage = (page) => {
    return {
       type: SET_CURRENT_PAGE,
       page: page
    }
 }
-export const setTotalCountAC = (count) => {
+export const setTotalCount = (count) => {
    return {
       type: SET_TOTAL_COUNT,
       count: count
+   }
+}
+export const setFetching = (isFetching) => {
+   return {
+      type: TOGGLE_IS_FETCHING,
+      isFetching: isFetching
    }
 }
 export default dialogsReducer

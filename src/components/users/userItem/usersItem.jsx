@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import classes from './UserItem.module.css'
 
 {/* <div className={classes.avatar}>
@@ -17,7 +18,8 @@ const UsersItem = (props) => {
       <div className={classes.userItem}>
          <div className={classes.avatarAndBtn}>
             <div className={classes.avatar}>
-               <img src={props.photo != null ? props.photo : userPhoto} alt="" />
+               <NavLink to={`./../profile/${props.id}`}> <img src={props.photo != null ? props.photo : userPhoto} alt="" /> </NavLink>
+
             </div>
             {props.followed
                ? <button onClick={() => { props.unfollow(props.id) }} className={classes.btn}>unfollow</button>

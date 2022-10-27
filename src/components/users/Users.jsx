@@ -29,14 +29,12 @@ const Users = ({ props, changePage }) => {
                <UsersItem
                   key={u.id}
                   follow={props.follow}
-                  unfollow={props.unfollow}
+                  unFollow={props.unFollow}
                   id={u.id}
                   photo={u.photos.small}
                   followed={u.followed}
                   name={u.name}
                   status={u.status}
-               // // country={u.location.country}
-               // // city={u.location.city}
                />)}
          </div>
       </div>

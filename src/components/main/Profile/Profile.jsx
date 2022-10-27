@@ -1,5 +1,6 @@
 import React from 'react';
 import PreLoader from '../../common/preLoader/preLoader';
+import { userPhoto } from '../../users/userItem/usersItem';
 import classes from './Profile.module.css'
 import ProfileItem from './ProfileItem/ProfileItem';
 
@@ -10,17 +11,17 @@ const Profile = (props) => {
    return (
       <div className={classes.profile}>
          <div className={classes.profileImg}>
-            <img src="https://i.pinimg.com/474x/d5/88/a1/d588a14d3cd0feb94e506db675830800.jpg" alt="" />
+            <img src={props.profile.photos.large || userPhoto} alt="" />
          </div>
          <div className={classes.profileInfo}>
             <div className={classes.profileName}>
                {props.profile.fullName}
             </div>
             <div className={classes.profileOtherInfo}>
-               <ProfileItem value={'Date of birth:2january'} />
+               <ProfileItem value={'Date of birth: 2january'} />
                <ProfileItem value={'City: Minsk'} />
-               <ProfileItem value={'Education: BSU 11'} />
-               <ProfileItem value={'Web Site: 12334jnkdgfl;s'} />
+               <ProfileItem value={`Job: ${props.profile.lookingForAJob}`} />
+               <ProfileItem value={`Status: ${props.profile.aboutMe}`} />
             </div>
          </div>
       </div>

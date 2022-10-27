@@ -5,10 +5,11 @@
    align-items: center;
 }
 .profileImg img{
+   background-size: cover;
    width: 100%;
-   max-width: 180px;
+   width: 140px;
    height: auto;
-   padding-right: 40px;
+   margin-right: 40px;
 }
 .profileName{
    margin-bottom: 20px;

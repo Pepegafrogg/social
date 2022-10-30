@@ -1,41 +1,20 @@
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setFetching, setTotalCount, setUsers, unFollow } from "../../redux/usersReducer";
-import axios from 'axios';
+import { followTC, unFollowTC, setCurrentPage, setUsers, setClicked, getUsersTC } from "../../redux/usersReducer";
 import Users from './Users';
 import React from 'react';
 import PreLoader from "../common/preLoader/preLoader";
 
-
 class UsersContainer extends React.Component {
    componentDidMount() {
-      this.props.setFetching(true)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-         withCredentials: true
-      })
-         .then(response => {
-            console.log(response.data)
-            this.props.setFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalCount(response.data.totalCount)
-         })
+      this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
    }
    changePage = (pageNumber) => {
-      this.props.setFetching(true)
-      this.props.setCurrentPage(pageNumber)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-         withCredentials: true
-      })
-         .then(response => {
-            console.log(response.data)
-            this.props.setFetching(false)
-            this.props.setUsers(response.data.items)
-         })
+      this.props.getUsersTC(pageNumber, this.props.pageSize)
    }
-
    render() {
       return (this.props.isFetching
          ? <PreLoader />
-         : <Users props={this.props} changePage={this.changePage} />
+         : <Users {...this.props} changePage={this.changePage} />
       )
    }
 }
@@ -47,9 +26,10 @@ const mapStateToProps = (state) => {
       totalCount: state.usersPage.totalCount,
       currentPage: state.usersPage.currentPage,
       isFetching: state.usersPage.isFetching,
+      isClicked: state.usersPage.isClicked,
    }
 
 }
-const mapDispatchToProps = { follow, unFollow, setUsers, setCurrentPage, setTotalCount, setFetching, }
+const mapDispatchToProps = { followTC, unFollowTC, setUsers, setCurrentPage, setClicked, getUsersTC }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)

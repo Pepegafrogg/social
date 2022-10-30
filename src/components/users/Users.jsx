@@ -2,7 +2,7 @@ import React from 'react';
 import UsersItem from './userItem/usersItem';
 import classes from './Users.module.css';
 
-const Users = ({ props, changePage }) => {
+const Users = (props) => {
    const pagesCount = Math.ceil(props.totalCount / props.pageSize)
    const pages = []
    for (let i = 1; i <= pagesCount; i++) {
@@ -17,7 +17,7 @@ const Users = ({ props, changePage }) => {
                      ? classes.selectedPage
                      : classes.otherPage
                   }
-                     onClick={(e) => changePage(i)}
+                     onClick={(e) => props.changePage(i)}
                   >
                      {i}
                   </span>
@@ -27,9 +27,11 @@ const Users = ({ props, changePage }) => {
          <div className={classes.usersPage}>
             {props.users.map(u =>
                <UsersItem
+                  setClicked={props.setClicked}
+                  isClicked={props.isClicked}
                   key={u.id}
-                  follow={props.follow}
-                  unFollow={props.unFollow}
+                  follow={props.followTC}
+                  unFollow={props.unFollowTC}
                   id={u.id}
                   photo={u.photos.small}
                   followed={u.followed}

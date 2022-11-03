@@ -5,9 +5,7 @@ import classes from './Profile.module.css'
 import ProfileItem from './ProfileItem/ProfileItem';
 
 const Profile = (props) => {
-   if (!props.profile) {
-      return <PreLoader />
-   }
+   if (!props.profile) return <PreLoader />
    return (
       <div className={classes.profile}>
          <div className={classes.profileImg}>

@@ -3,12 +3,14 @@ import { followTC, unFollowTC, setCurrentPage, setUsers, setClicked, getUsersTC 
 import Users from './Users';
 import React from 'react';
 import PreLoader from "../common/preLoader/preLoader";
+import { compose } from "redux";
 
 class UsersContainer extends React.Component {
    componentDidMount() {
       this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
    }
    changePage = (pageNumber) => {
+      this.props.setCurrentPage(pageNumber)
       this.props.getUsersTC(pageNumber, this.props.pageSize)
    }
    render() {
@@ -32,4 +34,5 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = { followTC, unFollowTC, setUsers, setCurrentPage, setClicked, getUsersTC }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+
+export default compose(connect(mapStateToProps, mapDispatchToProps),)(UsersContainer)

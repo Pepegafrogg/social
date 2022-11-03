@@ -1,5 +1,7 @@
-import React from 'react';
 import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { compose } from 'redux';
+import { WithAuthRedirect } from '../../hoc/WithAuthRedirect';
 import { sendMessageActionCreator, updateNewMessageActionCreator } from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 
@@ -8,7 +10,7 @@ const mapStateToProps = (state) => {
    return {
       dialogs: state.dialogPage.dialogData,
       messages: state.dialogPage.messagesData,
-      newMessageBody: state.dialogPage.messagesData.newMessageBody
+      newMessageBody: state.dialogPage.messagesData.newMessageBody,
    }
 
 }
@@ -24,7 +26,6 @@ const mapDispatchToProps = (dispatch) => {
    }
 }
 
-
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const DialogsContainer = compose(connect(mapStateToProps, mapDispatchToProps), WithAuthRedirect)(Dialogs)
 
 export default DialogsContainer;

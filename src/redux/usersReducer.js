@@ -115,7 +115,7 @@ export const followTC = (userId) => {
 export const unFollowTC = (userId) => {
    return (dispatch) => {
       dispatch(setClicked(true, userId))
-      usersAPI.follow(userId)
+      usersAPI.unFollow(userId)
          .then(response => {
             if (response.data.resultCode === 0) {
                dispatch(unFollowSuccess(userId))

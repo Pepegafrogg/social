@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from './dialogItem/DialogItem';
 import MessageItem from './messageItem/MessageItem';
+import { Navigate } from 'react-router-dom';
 
 const Dialogs = (props) => {
    const dialogsElements = props.dialogs.map(item => <DialogItem id={item.id} name={item.name} key={item.id} />)
@@ -16,6 +17,7 @@ const Dialogs = (props) => {
       props.onMessageChange(text)
    }
 
+   if (!props.isLogin) return <Navigate to={'/login'} />
 
    return (
       <div className={classes.main}>

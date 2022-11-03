@@ -9,6 +9,7 @@ import './styles/app.css'
 import DialogsContainer from "./components/dialogs/DialogsContainer";
 import UsersContainer from "./components/users/UsersContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
+import LoginPage from "./components/login/Login";
 
 function App(props) {
    return (
@@ -17,6 +18,7 @@ function App(props) {
          <div className="page">
             <Nav />
             <Routes>
+               <Route path="/login" element={<LoginPage />} />
                <Route path="/" element={<Main />} />
                <Route path="/profile/:userId" element={<Main />} />
                <Route path="/profile/*" element={<Main />} />

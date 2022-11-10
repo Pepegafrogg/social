@@ -33,7 +33,7 @@ const UsersItem = (props) => {
                   {props.name}
                </div>
                <div className='status'>
-                  status
+                  {props.status || 'status'}
                </div>
             </div>
             <div className={classes.location}>

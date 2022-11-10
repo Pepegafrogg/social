@@ -1,8 +1,10 @@
 import React from 'react';
+import { updateStatus } from '../../../redux/profileReducer';
 import PreLoader from '../../common/preLoader/preLoader';
 import { userPhoto } from '../../users/userItem/usersItem';
 import classes from './Profile.module.css'
 import ProfileItem from './ProfileItem/ProfileItem';
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 const Profile = (props) => {
    if (!props.profile) return <PreLoader />
@@ -16,6 +18,7 @@ const Profile = (props) => {
                {props.profile.fullName}
             </div>
             <div className={classes.profileOtherInfo}>
+               <ProfileStatus status={props.status} profile={props.profile} updateStatus={props.updateStatus} />
                <ProfileItem value={'Date of birth: 2january'} />
                <ProfileItem value={'City: Minsk'} />
                <ProfileItem value={`Job: ${props.profile.lookingForAJob}`} />

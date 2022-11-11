@@ -14,7 +14,6 @@ const initialState = {
       { id: 5, post: 'react app', likes: 12 },
       { id: 6, post: 'that is all', likes: 8 }
    ],
-   nextPostText: 'asasdd',
    profile: null,
    status: ''
 }
@@ -30,19 +29,16 @@ const profileReducer = (state = initialState, action) => {
 
       case ADD_POST:
          const lastId = takeProfileId()
-         const newPost = { id: lastId + 1, post: state.nextPostText, likes: 0 }
+         const newPost = { id: lastId + 1, post: action.newPost, likes: 0 }
          return {
             ...state,
-            nextPostText: '',
             postsData: [...state.postsData, newPost],
          }
-
       case UPDATE_NEW_POST_TEXT:
          return {
             ...state,
             nextPostText: action.newText
          }
-
       case SET_USER_PROFILE:
          return {
             ...state,
@@ -57,8 +53,7 @@ const profileReducer = (state = initialState, action) => {
    }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
-export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
+export const addPost = (text) => ({ type: ADD_POST, newPost: text })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile: profile })
 export const setUserStatus = (status) => ({ type: SET_STATUS, status: status })
 export const getUserProfile = (userId) => {

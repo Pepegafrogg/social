@@ -1,6 +1,4 @@
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
-
 
 const initialState = {
    dialogData: [
@@ -19,7 +17,6 @@ const initialState = {
       { id: 5, name: 'Pepega5', message: 'I like ' },
       { id: 6, name: 'Pepega6', message: 'To do kwa' },
    ],
-   newMessageBody: 'ddddddd'
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -28,33 +25,16 @@ const dialogsReducer = (state = initialState, action) => {
       const lasdId = list[list.length - 1].id
       return lasdId
    }
-
-   if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-      return {
-         ...state,
-         newMessageBody: action.newMessageText
-      }
-   } else if (action.type === SEND_MESSAGE) {
-      const body = state.newMessageBody
+   if (action.type === SEND_MESSAGE) {
       const lastId = takeMessageId()
-      const newMessage = { id: lastId + 1, name: 'asd', message: body }
+      const newMessage = { id: lastId + 1, name: `Pepega${lastId + 1}`, message: action.newMessageText }
       return {
          ...state,
-         newMessageBody: '',
          messagesData: [...state.messagesData, newMessage]
       }
    }
-
    return state
 }
-
-
-export const updateNewMessageActionCreator = (text) => {
-   return {
-      type: UPDATE_NEW_MESSAGE_BODY,
-      newMessageText: text
-   }
-}
-export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE })
+export const sendMessage = (text) => ({ type: SEND_MESSAGE, newMessageText: text })
 
 export default dialogsReducer

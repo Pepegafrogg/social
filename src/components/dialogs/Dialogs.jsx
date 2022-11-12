@@ -4,17 +4,20 @@ import DialogItem from './dialogItem/DialogItem';
 import MessageItem from './messageItem/MessageItem';
 import { Navigate } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { TextArea } from '../common/FormsControls/FormsControls';
+import { maxLengthCreator, required } from '../../utils/validators/validator';
 
-const DialogsForm = (props) => {
+const maxLength10 = maxLengthCreator(10)
+const AddMessageForm = (props) => {
    return (
       <form onSubmit={props.handleSubmit}>
-         <Field component={'textarea'} name={'newMessage'} value={props.newMessageBody} placeholder='Enter your message'> </Field>
+         <Field component={TextArea} name={'newMessage'} value={props.newMessageBody} validate={[required, maxLength10]} placeholder='Enter your message'> </Field>
          <div> <button>Send</button> </div>
       </form>
    )
 }
 
-const DialogsReduxForm = reduxForm({ form: 'Message' })(DialogsForm)
+const DialogsReduxForm = reduxForm({ form: 'Message' })(AddMessageForm)
 
 const Dialogs = (props) => {
    const dialogsElements = props.dialogs.map(item => <DialogItem id={item.id} name={item.name} key={item.id} />)

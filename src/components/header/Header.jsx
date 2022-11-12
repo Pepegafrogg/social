@@ -8,7 +8,7 @@ const Header = (props) => {
          <img style={{ width: '50px' }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="" />
 
          {props.isLogin
-            ? <div className={classes.login}> {props.login}</div>
+            ? <div > <button className={classes.login} onClick={props.logout}>Log out</button> </div>
             : <div className={classes.login}> <NavLink to={`/login`}>Login </NavLink> </div>
          }
 

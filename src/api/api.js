@@ -42,7 +42,10 @@ export const authAPI = {
    authMe: () => {
       return instance.get(`auth/me`)
    },
-   authLogin: (email, password, rememberMe) => {
-      return instance.put(`auth/login`)
+   authLogin: (email, password, rememberMe = false) => {
+      return instance.post(`auth/login`, { email, password, rememberMe })
+   },
+   authLogout: () => {
+      return instance.delete(`auth/login`)
    }
 }

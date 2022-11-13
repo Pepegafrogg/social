@@ -17,7 +17,6 @@
    margin: 0;
    margin-bottom: 10px;
 }
-
 .loginBtn{
    border-radius: 30px;
    display: block;
@@ -25,4 +24,10 @@
    padding: 5px;
    background-color: rgb(35, 53, 212);
    color: white;
+}
+.formSummaryError{
+   margin:  5px 0;
+   border: 1px red solid;
+   padding: 10px;
+   color: red;
 }

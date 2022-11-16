@@ -35,13 +35,10 @@ function withRouter(Component) {
 
 class App extends Component {
    componentDidMount() {
-      console.log('1', this.props.initialized)
       this.props.initializeApp()
    }
 
    render() {
-
-      console.log('2', this.props.initialized)
       if (!this.props.initialized) {
          return <PreLoader />
       }

@@ -8,6 +8,7 @@ const initialState = {
 const appReducer = (state = initialState, action) => {
    switch (action.type) {
       case SET_INITIALIZED:
+         console.log('init')
          return {
             ...state,
             initialized: true
@@ -19,11 +20,10 @@ const appReducer = (state = initialState, action) => {
 }
 
 export const initializedSucces = () => ({ type: SET_INITIALIZED })
-export const initializeApp = () => (dispatch) => {
-   dispatch(getAuth())
-      .then(
-         dispatch(initializedSucces())
-      )
+export const initializeApp = () => async (dispatch) => {
+   await dispatch(getAuth())
+   dispatch(initializedSucces())
+
 }
 
 export default appReducer

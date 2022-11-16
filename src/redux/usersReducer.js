@@ -83,10 +83,10 @@ export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page })
 export const setTotalCount = (count) => ({ type: SET_TOTAL_COUNT, count })
 export const setFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const setClicked = (isClicked, userId) => ({ type: TOGGLE_IS_CLICKED, isClicked, userId })
-export const getUsersTC = (currentPage, pageSize) => {
+export const requestUsersTC = (page, pageSize) => {
    return (dispatch) => {
       dispatch(setFetching(true))
-      usersAPI.getUsers(currentPage, pageSize)
+      usersAPI.getUsers(page, pageSize)
          .then(data => {
             dispatch(setFetching(false))
             dispatch(setUsers(data.items))

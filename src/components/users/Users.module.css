@@ -8,14 +8,3 @@
 }
 .usersNav{
 }
-.selectedPage{
-   margin-left: 5px;
-   font-size: 26px;
-   font-weight: 700;
-}
-.otherPage{
-   margin-left: 5px;
-}
-.otherPage:first-child{
-   margin-left: 0;
-}

@@ -1,57 +1,41 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUserProfile, updateStatus, getStatus } from '../../../redux/profileReducer'
+import { getUserProfile, updateStatus, getStatus, savePhoto, saveProfile } from '../../../redux/profileReducer'
 import Profile from './Profile'
-import { Navigate, useLocation, useNavigate, useParams, } from 'react-router-dom';
-import { WithAuthRedirect } from '../../../hoc/WithAuthRedirect';
+import { useNavigate, useParams, } from 'react-router-dom';
 import { compose } from 'redux';
+import { useEffect } from 'react';
 
-function withRouter(Component) {
-   function ComponentWithRouterProp(props) {
-      let location = useLocation();
-      let navigate = useNavigate();
-      let params = useParams();
-      return (
-         <Component
-            {...props}
-            router={{ location, navigate, params }}
-         />
-      );
-   }
 
-   return ComponentWithRouterProp;
-}
 
-class ProfileContainer extends React.Component {
-
-   componentDidMount() {
-      let userId = this.props.router.params.userId
+const ProfileContainer = (props) => {
+   const params = useParams();
+   const navigate = useNavigate()
+   useEffect(() => {
+      let userId = params.userId
       if (!userId) {
-         userId = this.props.authUserId
-         if (!userId) {
-            // <Navigate to={'/login'} />
-            userId = 2
-         }
+         userId = props.authUserId
+         if (!userId) navigate('/login')
       }
-      this.props.getUserProfile(userId)
-      this.props.getStatus(userId)
-   }
+      props.getUserProfile(userId)
+      props.getStatus(userId)
 
-   render() {
-      return (
-         <Profile {...this.props} profile={this.props.profile} />
-      )
-   }
+
+   }, [props.authUserId]);
+
+   return (
+      <Profile {...props} profile={props.profile} isOwner={!params.userId} />
+   )
 }
 const mapStateToProps = (state) => {
    return {
       profile: state.profilePage.profile,
       status: state.profilePage.status,
       authUserId: state.auth.userId,
-      isLogin: state.auth.Islogin
+      isLogin: state.auth.Islogin,
    }
 }
-const mapDispatchToProps = { getUserProfile, getStatus, updateStatus }
+const mapDispatchToProps = { getUserProfile, getStatus, updateStatus, savePhoto, saveProfile }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter,)(ProfileContainer)
+export default compose(connect(mapStateToProps, mapDispatchToProps))(ProfileContainer)
 

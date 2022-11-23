@@ -5,21 +5,22 @@ import React from 'react';
 import PreLoader from "../common/preLoader/preLoader";
 import { compose } from "redux";
 import { getCurrentPage, getIsClicked, getIsFetching, getPageSize, getTotalCount, getUsers } from "../../redux/usersSelectors";
+import { useEffect } from "react";
 
-class UsersContainer extends React.Component {
-   componentDidMount() {
-      this.props.requestUsersTC(this.props.currentPage, this.props.pageSize)
+
+
+const UsersContainer = (props) => {
+   useEffect(() => {
+      props.requestUsersTC(props.currentPage, props.pageSize)
+   }, []);
+   const changePage = (pageNumber) => {
+      props.setCurrentPage(pageNumber)
+      props.requestUsersTC(pageNumber, props.pageSize)
    }
-   changePage = (pageNumber) => {
-      this.props.setCurrentPage(pageNumber)
-      this.props.requestUsersTC(pageNumber, this.props.pageSize)
-   }
-   render() {
-      return (this.props.isFetching
-         ? <PreLoader />
-         : <Users {...this.props} changePage={this.changePage} />
-      )
-   }
+   return (props.isFetching
+      ? <PreLoader />
+      : <Users {...props} changePage={changePage} />
+   )
 }
 
 const mapStateToProps = (state) => {

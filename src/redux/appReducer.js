@@ -8,7 +8,6 @@ const initialState = {
 const appReducer = (state = initialState, action) => {
    switch (action.type) {
       case SET_INITIALIZED:
-         console.log('init')
          return {
             ...state,
             initialized: true

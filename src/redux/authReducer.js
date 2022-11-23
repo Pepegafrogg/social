@@ -31,7 +31,6 @@ export const getAuth = () => async (dispatch) => {
    if (response.data.resultCode === 0) {
       const { id, login, email } = response.data.data
       dispatch(setAuthUserData(id, email, login, true))
-      console.log('auth2')
    }
 }
 

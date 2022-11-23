@@ -13,7 +13,7 @@ const LoginForm = (props) => {
    return (
       <form onSubmit={props.handleSubmit}>
          <div className={classes.loginItem}>
-            <Field className={classes.loginInput} placeholder={'Emal'} component={Input} name={'email'} validate={[required, maxLength5]} />
+            <Field className={classes.loginInput} placeholder={'Email'} component={Input} name={'email'} validate={[required, maxLength5]} />
          </div>
          <div className={classes.loginItem}>
             <Field placeholder={'Password'} type={'password'} component={Input} name={'password'} validate={[required, maxLength5]} />

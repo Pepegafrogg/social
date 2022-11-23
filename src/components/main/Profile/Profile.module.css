@@ -4,19 +4,15 @@
    display: flex;
    align-items: center;
 }
+.profileImg {
+}
 .profileImg img{
    background-size: cover;
    width: 100%;
-   width: 140px;
+   width: 200px;
    height: auto;
    margin-right: 40px;
 }
-.profileName{
-   margin-bottom: 20px;
-}
-.profileInfo{
+.changeProfileImg{
 
-}
-.profileOtherInfo{
-   
 }

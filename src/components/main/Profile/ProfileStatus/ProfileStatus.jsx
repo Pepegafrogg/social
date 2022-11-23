@@ -23,10 +23,10 @@ const ProfileStatus = (props) => {
    return (
       <div>
          {editMode
-            ? <div> <input onChange={onStatusChange} autoFocus={true} onBlur={deactiveState} value={status} /> </div>
-            : <div> <span onDoubleClick={activeState} >{props.status}</span> </div>
+            ? <div className={props.class} > <input onChange={onStatusChange} autoFocus={true} onBlur={deactiveState} value={status} /> </div>
+            : <div className={props.class} style={{ display: 'flex', }}><b>Status:</b><div style={{ marginLeft: '7px' }} onDoubleClick={activeState} >{props.status}</div> </div>
          }
-      </div>
+      </div >
    )
 }
 

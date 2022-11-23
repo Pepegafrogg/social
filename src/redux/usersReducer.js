@@ -11,7 +11,7 @@ const TOGGLE_IS_CLICKED = 'users/TOGGLE_IS_CLICKED'
 
 const initialState = {
    users: [],
-   pageSize: 5,
+   pageSize: 100,
    totalCount: 0,
    currentPage: 1,
    isFetching: true,
@@ -20,34 +20,23 @@ const initialState = {
 const dialogsReducer = (state = initialState, action) => {
    switch (action.type) {
       case FOLLOW:
-         return {
-            ...state,
-            users: updateObjectInArray(state.users, action.userId, 'id', { followed: true })
-         }
+         return { ...state, users: updateObjectInArray(state.users, action.userId, 'id', { followed: true }) }
+
       case UNFOLLOW:
-         return {
-            ...state,
-            users: updateObjectInArray(state.users, action.userId, 'id', { followed: false })
-         }
+         return { ...state, users: updateObjectInArray(state.users, action.userId, 'id', { followed: false }) }
+
       case SET_USERS:
-         return {
-            ...state, users: action.users
-         }
+         return { ...state, users: action.users }
+
       case SET_CURRENT_PAGE:
-         return {
-            ...state,
-            currentPage: action.page
-         }
+         return { ...state, currentPage: action.page }
+
       case SET_TOTAL_COUNT:
-         return {
-            ...state,
-            totalCount: action.count
-         }
+         return { ...state, totalCount: action.count }
+
       case TOGGLE_IS_FETCHING:
-         return {
-            ...state,
-            isFetching: action.isFetching
-         }
+         return { ...state, isFetching: action.isFetching }
+
       case TOGGLE_IS_CLICKED:
          return {
             ...state,
@@ -69,6 +58,8 @@ export const setClicked = (isClicked, userId) => ({ type: TOGGLE_IS_CLICKED, isC
 export const requestUsersTC = (page, pageSize) => async (dispatch) => {
    dispatch(setFetching(true))
    const data = await usersAPI.getUsers(page, pageSize)
+   // console.log(data)
+   // console.log(data.items.filter(i => console.log(i.photos)))
    dispatch(setFetching(false))
    dispatch(setUsers(data.items))
    dispatch(setTotalCount(data.totalCount))

@@ -15,8 +15,11 @@ const Profile = (props) => {
       }
    }
    const onSubmit = (formData) => {
-      // const { name, job, skills, about } = formData
-      props.saveProfile(formData)
+      props.saveProfile(formData).then(
+         () => {
+            setEditMode(false)
+         }
+      )
       setEditMode(false)
    }
    return (

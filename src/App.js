@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./components/nav/Nav";
 import News from "./components/news/News";
@@ -33,37 +33,37 @@ function withRouter(Component) {
    return ComponentWithRouterProp;
 }
 
-class App extends Component {
-   componentDidMount() {
-      this.props.initializeApp()
+const App = (props) => {
+
+   useEffect(() => {
+      props.initializeApp()
+   }, [props.initialized])
+
+   if (!props.initialized) {
+      return <PreLoader />
    }
 
-   render() {
-      if (!this.props.initialized) {
-         return <PreLoader />
-      }
-      return (
-         <div className="App">
-            <HeaderContainer />
-            <div className="page">
-               <Nav />
-               <Suspense fallback={'Loading...'}>
-                  <Routes>
-                     <Route path="/login" element={<LoginPage />} />
-                     <Route path="/" element={<Main />} />
-                     <Route path="/profile/:userId" element={<Main />} />
-                     <Route path="/profile/*" element={<Main />} />
-                     <Route path="/messages/*" element={<DialogsContainer />} />
-                     <Route path="/users" element={<UsersContainer />} />
-                     <Route path="/news" element={<News />} />
-                     <Route path="/music" element={<Music />} />
-                     <Route path="/settings" element={<Settings />} />
-                  </Routes>
-               </Suspense>
-            </div>
+   return (
+      <div className="App">
+         <HeaderContainer />
+         <div className="page">
+            <Nav />
+            <Suspense fallback={'Loading...'}>
+               <Routes>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/" element={<Navigate to="/profile" />} />
+                  <Route path="/profile/:userId" element={<Main />} />
+                  <Route path="/profile/*" element={<Main />} />
+                  <Route path="/messages/*" element={<DialogsContainer />} />
+                  <Route path="/users" element={<UsersContainer />} />
+                  <Route path="/news" element={<News />} />
+                  <Route path="/music" element={<Music />} />
+                  <Route path="/settings" element={<Settings />} />
+               </Routes>
+            </Suspense>
          </div>
-      )
-   }
+      </div>
+   )
 }
 const mapStateToProps = (state) => {
    return {

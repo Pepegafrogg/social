@@ -58,8 +58,6 @@ export const setClicked = (isClicked, userId) => ({ type: TOGGLE_IS_CLICKED, isC
 export const requestUsersTC = (page, pageSize) => async (dispatch) => {
    dispatch(setFetching(true))
    const data = await usersAPI.getUsers(page, pageSize)
-   // console.log(data)
-   // console.log(data.items.filter(i => console.log(i.photos)))
    dispatch(setFetching(false))
    dispatch(setUsers(data.items))
    dispatch(setTotalCount(data.totalCount))

@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form"
 import { profileAPI } from "../api/api"
 
 const ADD_POST = 'profile/ADD-POST'
@@ -5,7 +6,6 @@ const UPDATE_NEW_POST_TEXT = 'profile/UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE'
 const SET_STATUS = 'profile/SET_STATUS'
 const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS'
-const SAVE_PROFILE_SUCCESS = `SAVE_PROFILE_SUCCESS `
 
 
 const initialState = {
@@ -44,8 +44,6 @@ const profileReducer = (state = initialState, action) => {
 
       case SAVE_PHOTO_SUCCESS:
          return { ...state, profile: { ...state.profile, photos: action.photos } }
-      case SAVE_PROFILE_SUCCESS:
-         return { ...state, profile: { ...state.profile, lookingForAJob: action.job, lookingForAJobDescription: action.skills, fullName: action.name } }
       default: return state
    }
 }
@@ -54,7 +52,6 @@ export const addPost = (text) => ({ type: ADD_POST, newPost: text })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile: profile })
 export const setUserStatus = (status) => ({ type: SET_STATUS, status: status })
 export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
-export const saveProfileSuccess = (name, job, skills, about) => ({ type: SAVE_PROFILE_SUCCESS, name, job, skills, about })
 export const getUserProfile = (userId) => async (dispatch) => {
    const response = await profileAPI.getProfile(userId)
    dispatch(setUserProfile(response.data))
@@ -75,11 +72,15 @@ export const savePhoto = (file) => async (dispatch) => {
       dispatch(savePhotoSuccess(response.data.data.photos))
    }
 }
-export const saveProfile = (profile) => async (dispatch) => {
-   // const userId = store.getState().auth.userId
+export const saveProfile = (profile) => async (dispatch, getState) => {
+   const userId = getState().auth.userId
    const response = await profileAPI.saveProfile(profile)
    if (response.data.resultCode === 0) {
       dispatch(getUserProfile(userId))
+   } else {
+      const message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+      dispatch(stopSubmit('editProfile', { _error: message }))
+      return Promise.reject(response.data.messages[0])
    }
 }
 export default profileReducer

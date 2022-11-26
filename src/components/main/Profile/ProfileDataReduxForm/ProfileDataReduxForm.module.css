@@ -1,0 +1,27 @@
+.profileName{
+   margin-bottom: 20px;
+}
+.profileOtherInfo{
+   
+}
+.profileInfo{
+
+}
+.profileItem{
+   margin-bottom: 7px;
+}
+.contactTitle{
+   margin-right: 15px;
+}
+.contactItem{
+   margin-bottom: 7px;
+   display: flex;
+   justify-content: end
+}
+
+.formSummaryError{
+   margin:  5px 0;
+   border: 1px red solid;
+   padding: 10px;
+   color: red;
+}

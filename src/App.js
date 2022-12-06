@@ -5,57 +5,43 @@ import News from "./components/news/News";
 import Settings from "./components/settings/Settings";
 import Music from "./components/music/Music";
 import './styles/app.css'
-import UsersContainer from "./components/users/UsersContainer";
-import HeaderContainer from "./components/header/HeaderContainer";
-import LoginPage from "./components/login/Login";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { Navigate, useLocation, useNavigate, useParams, } from 'react-router-dom';
+import Login from "./components/login/Login";
+import { Navigate } from 'react-router-dom';
 import { initializeApp, initializedSucces } from "./redux/appReducer";
 import PreLoader from "./components/common/preLoader/preLoader";
 import { Suspense } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import Users from "./components/users/Users";
+import Header from "./components/header/Header";
 
-const DialogsContainer = React.lazy(() => import("./components/dialogs/DialogsContainer"));
+const Dialogs = React.lazy(() => import("./components/dialogs/Dialogs"));
 const Main = React.lazy(() => import("./components/main/Main"));
-function withRouter(Component) {
-   function ComponentWithRouterProp(props) {
-      let location = useLocation();
-      let navigate = useNavigate();
-      let params = useParams();
-      return (
-         <Component
-            {...props}
-            router={{ location, navigate, params }}
-         />
-      );
-   }
-
-   return ComponentWithRouterProp;
-}
 
 const App = (props) => {
+   const { initialized } = useSelector(state => state.app)
+   const dispatch = useDispatch()
 
    useEffect(() => {
-      props.initializeApp()
-   }, [props.initialized])
+      dispatch(initializeApp())
+   }, [initialized])
 
-   if (!props.initialized) {
+   if (!initialized) {
       return <PreLoader />
    }
 
    return (
       <div className="App">
-         <HeaderContainer />
+         <Header />
          <div className="page">
             <Nav />
             <Suspense fallback={'Loading...'}>
                <Routes>
-                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/login" element={<Login />} />
                   <Route path="/" element={<Navigate to="/profile" />} />
                   <Route path="/profile/:userId" element={<Main />} />
                   <Route path="/profile/*" element={<Main />} />
-                  <Route path="/messages/*" element={<DialogsContainer />} />
-                  <Route path="/users" element={<UsersContainer />} />
+                  <Route path="/messages/*" element={<Dialogs />} />
+                  <Route path="/users" element={<Users />} />
                   <Route path="/news" element={<News />} />
                   <Route path="/music" element={<Music />} />
                   <Route path="/settings" element={<Settings />} />
@@ -65,11 +51,5 @@ const App = (props) => {
       </div>
    )
 }
-const mapStateToProps = (state) => {
-   return {
-      initialized: state.app.initialized
-   }
-}
-const mapDispatchToProps = { initializeApp }
-export default compose(connect(mapStateToProps, mapDispatchToProps), withRouter)(App)
+export default App
 

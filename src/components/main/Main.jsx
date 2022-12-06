@@ -1,15 +1,15 @@
 import React from 'react';
 import Header from './Header/Header';
 import classes from './Main.module.css'
-import MyPostsContainer from './MyPosts/MyPostsContainer';
-import ProfileContainer from './Profile/ProfileContainer';
+import MyPosts from './MyPosts/MyPosts';
+import Profile from './Profile/Profile';
 
 const Main = (props) => {
    return (
       <div className={classes.main}>
          <Header />
-         <ProfileContainer />
-         <MyPostsContainer />
+         <Profile />
+         <MyPosts />
       </div>
    );
 }
